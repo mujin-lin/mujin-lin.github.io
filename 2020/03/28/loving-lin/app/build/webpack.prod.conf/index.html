@@ -1,0 +1,320 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+
+  
+  <title>loving-lin/app/build/webpack.prod.conf | Hexo</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="var path &#x3D; require(&#39;path&#39;) var utils &#x3D; require(&#39;.&#x2F;utils&#39;) var webpack &#x3D; require(&#39;webpack&#39;) var config &#x3D; require(&#39;..&#x2F;config&#39;) var merge &#x3D; require(&#39;webpack-merge&#39;) var baseWebpackConfig &#x3D; require(&#39;.&#x2F;web">
+<meta property="og:type" content="article">
+<meta property="og:title" content="loving-lin&#x2F;app&#x2F;build&#x2F;webpack.prod.conf">
+<meta property="og:url" content="http://yoursite.com/2020/03/28/loving-lin/app/build/webpack.prod.conf/index.html">
+<meta property="og:site_name" content="Hexo">
+<meta property="og:description" content="var path &#x3D; require(&#39;path&#39;) var utils &#x3D; require(&#39;.&#x2F;utils&#39;) var webpack &#x3D; require(&#39;webpack&#39;) var config &#x3D; require(&#39;..&#x2F;config&#39;) var merge &#x3D; require(&#39;webpack-merge&#39;) var baseWebpackConfig &#x3D; require(&#39;.&#x2F;web">
+<meta property="og:locale" content="en_US">
+<meta property="article:published_time" content="2020-03-28T04:35:25.225Z">
+<meta property="article:modified_time" content="2019-02-19T00:40:12.000Z">
+<meta property="article:author" content="John Doe">
+<meta name="twitter:card" content="summary">
+  
+    <link rel="alternate" href="/atom.xml" title="Hexo" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  
+    <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
+  
+  
+<link rel="stylesheet" href="/css/style.css">
+
+<meta name="generator" content="Hexo 4.2.0"></head>
+
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">Hexo</a>
+      </h1>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"></a>
+        
+          <a class="main-nav-link" href="/">Home</a>
+        
+          <a class="main-nav-link" href="/archives">Archives</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
+        
+        <a id="nav-search-btn" class="nav-icon" title="Search"></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://yoursite.com"></form>
+      </div>
+    </div>
+  </div>
+</header>
+      <div class="outer">
+        <section id="main"><article id="post-loving-lin/app/build/webpack.prod.conf" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2020/03/28/loving-lin/app/build/webpack.prod.conf/" class="article-date">
+  <time datetime="2020-03-28T04:35:25.225Z" itemprop="datePublished">2020-03-28</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      loving-lin/app/build/webpack.prod.conf
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        var path = require('path')
+var utils = require('./utils')
+var webpack = require('webpack')
+var config = require('../config')
+var merge = require('webpack-merge')
+var baseWebpackConfig = require('./webpack.base.conf')
+var HtmlWebpackPlugin = require('html-webpack-plugin')
+var ExtractTextPlugin = require('extract-text-webpack-plugin')
+var env = config.build.env
+
+var webpackConfig = merge(baseWebpackConfig, {
+  module: {
+    rules: utils.styleLoaders({
+      sourceMap: config.build.productionSourceMap,
+      extract: true
+    })
+  },
+  devtool: config.build.productionSourceMap ? '#source-map' : false,
+  output: {
+    path: config.build.assetsRoot,
+    filename: utils.assetsPath('js/[name].[chunkhash].js'),
+    chunkFilename: utils.assetsPath('js/[id].[chunkhash].js')
+  },
+  plugins: [
+    // http://vuejs.github.io/vue-loader/en/workflow/production.html
+    new webpack.DefinePlugin({
+      'process.env': env
+    }),
+    new webpack.optimize.UglifyJsPlugin({
+      compress: {
+        warnings: false
+      },
+      sourceMap: true
+    }),
+    // extract css into its own file
+    new ExtractTextPlugin({
+      filename: utils.assetsPath('css/[name].[contenthash].css')
+    }),
+    // generate dist index.html with correct asset hash for caching.
+    // you can customize output by editing /index.html
+    // see https://github.com/ampedandwired/html-webpack-plugin
+    new HtmlWebpackPlugin({
+      filename: config.build.index,
+      template: 'index.html',
+      inject: true,
+      minify: {
+        removeComments: true,
+        collapseWhitespace: true,
+        removeAttributeQuotes: true
+        // more options:
+        // https://github.com/kangax/html-minifier#options-quick-reference
+      },
+      // necessary to consistently work with multiple chunks via CommonsChunkPlugin
+      chunksSortMode: 'dependency'
+    }),
+    // split vendor js into its own file
+    new webpack.optimize.CommonsChunkPlugin({
+      name: 'vendor',
+      minChunks: function (module, count) {
+        // any required modules inside node_modules are extracted to vendor
+        return (
+          module.resource &&
+          /\.js$/.test(module.resource) &&
+          module.resource.indexOf(
+            path.join(__dirname, '../node_modules')
+          ) === 0
+        )
+      }
+    }),
+    // extract webpack runtime and module manifest to its own file in order to
+    // prevent vendor hash from being updated whenever app bundle is updated
+    new webpack.optimize.CommonsChunkPlugin({
+      name: 'manifest',
+      chunks: ['vendor']
+    })
+  ]
+})
+
+if (config.build.productionGzip) {
+  var CompressionWebpackPlugin = require('compression-webpack-plugin')
+
+  webpackConfig.plugins.push(
+    new CompressionWebpackPlugin({
+      asset: '[path].gz[query]',
+      algorithm: 'gzip',
+      test: new RegExp(
+        '\\.(' +
+        config.build.productionGzipExtensions.join('|') +
+        ')$'
+      ),
+      threshold: 10240,
+      minRatio: 0.8
+    })
+  )
+}
+
+if (config.build.bundleAnalyzerReport) {
+  var BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPlugin
+  webpackConfig.plugins.push(new BundleAnalyzerPlugin())
+}
+
+module.exports = webpackConfig
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://yoursite.com/2020/03/28/loving-lin/app/build/webpack.prod.conf/" data-id="ck8b4fwvk000cs80l43hdeenj" class="article-share-link">Share</a>
+      
+      
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/2020/03/28/loving-lin/app/config/dev.env/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Newer</strong>
+      <div class="article-nav-title">
+        
+          loving-lin/app/config/dev.env
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2020/03/28/loving-lin/app/build/webpack.dev.conf/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title">loving-lin/app/build/webpack.dev.conf</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+</section>
+        
+          <aside id="sidebar">
+  
+    
+
+  
+    
+
+  
+    
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Archives</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/03/">March 2020</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Recent Posts</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/2020/03/28/loving-lin/static/js/vendor.b769607e6d594fe4e252/">loving-lin/static/js/vendor.b769607e6d594fe4e252</a>
+          </li>
+        
+          <li>
+            <a href="/2020/03/28/loving-lin/static/js/manifest.c9f1f49002d0487072ac/">loving-lin/static/js/manifest.c9f1f49002d0487072ac</a>
+          </li>
+        
+          <li>
+            <a href="/2020/03/28/loving-lin/static/js/app.dd44f265da874e0d2a25/">loving-lin/static/js/app.dd44f265da874e0d2a25</a>
+          </li>
+        
+          <li>
+            <a href="/2020/03/28/loving-lin/static/css/app.c40bf2af2aad3f43dfa7220227f71244/">loving-lin/static/css/app.c40bf2af2aad3f43dfa7220227f71244</a>
+          </li>
+        
+          <li>
+            <a href="/2020/03/28/loving-lin/app/src/assets/reset/">loving-lin/app/src/assets/reset</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      &copy; 2020 John Doe<br>
+      Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+</nav>
+    
+
+<script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+
+
+  
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+
+  
+<script src="/fancybox/jquery.fancybox.pack.js"></script>
+
+
+
+
+<script src="/js/script.js"></script>
+
+
+
+
+  </div>
+</body>
+</html>
